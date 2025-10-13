@@ -1,6 +1,5 @@
 import task1.Container;
 import task2.ConsolePrinter;
-import task2.Printer;
 import task3.Pair;
 import task4.Сompare;
 import task5.ArrayValues;
