@@ -1,4 +1,4 @@
-package task2;
+package homework1.task2;
 
 public class ConsolePrinter<T> implements Printer<T> {
 

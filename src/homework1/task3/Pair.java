@@ -1,4 +1,4 @@
-package task3;
+package homework1.task3;
 
 public class Pair<A, B>{
     private A a;

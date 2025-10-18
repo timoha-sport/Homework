@@ -1,8 +1,10 @@
-import task1.Container;
-import task2.ConsolePrinter;
-import task3.Pair;
-import task4.Сompare;
-import task5.ArrayValues;
+package homework1;
+
+import homework1.task1.Container;
+import homework1.task2.ConsolePrinter;
+import homework1.task3.Pair;
+import homework1.task4.Сompare;
+import homework1.task5.ArrayValues;
 
 class Main{
     public static void main(String[] args) {
