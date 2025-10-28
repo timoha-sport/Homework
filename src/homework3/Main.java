@@ -19,7 +19,7 @@ public class Main {
         myList.add(4);
         System.out.println(myList.getSize());
         myList.add(1, 5);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < myList.getSize(); i++) {
             Object o = myList.get(i);
             System.out.print(o + " ");
         }

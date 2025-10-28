@@ -20,7 +20,8 @@ public class MyArrayList<E> {
     public void add(int index, E element) {
         Object temp = element;
         Object tempSwap = temp;
-        for (int i = index; i < size + 1; i++) {
+        size++;
+        for (int i = index; i < size; i++) {
             temp = arr[i];
             arr[i] = tempSwap;
             tempSwap = temp;
