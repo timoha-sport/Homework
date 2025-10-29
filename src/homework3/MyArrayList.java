@@ -1,6 +1,8 @@
 package homework3;
 
+import java.util.Arrays;
 import java.util.Objects;
+
 
 public class MyArrayList<E> {
 
@@ -8,25 +10,30 @@ public class MyArrayList<E> {
     private int size = 0;
     private int code;
 
-    public int Size() {
+    public int size() {
         return size;
     }
 
     public boolean add(E e) {
-        if (size < arr.length) {
-            arr[size++] = e;
-            return true;
+        ensureCapacity(size + 1);
+        arr[size++] = e;
+        return true;
+    }
+
+    private void ensureCapacity(int minCapacity) {
+        if (minCapacity > arr.length) {
+            arr = new Object[arr.length * 2];
+            int newCapacity = arr.length * 2;
+            if (newCapacity < minCapacity) {
+                newCapacity = minCapacity;
+            }
+            arr = Arrays.copyOf(arr, newCapacity);
         }
-        return false;
     }
 
     public void add(int index, E element) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Индекс вне диапазона");
-        }
-        if (size == arr.length) {
-            increaseCapacity();
-        }
+        checkIndex(index);
+        ensureCapacity(size + 1);
         for (int i = size; i > index; i--) {
             arr[i] = arr[i - 1];
         }
@@ -34,20 +41,26 @@ public class MyArrayList<E> {
         size++;
     }
 
-    private void increaseCapacity() {
+    private void checkIndex(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Индекс вне диапазона");
+        }
     }
 
 
     public Object get(int index) {
+        checkIndex(index);
         return arr[index];
     }
 
     public void set(int index, E element) {
+        checkIndex(index);
         arr[index] = element;
     }
 
     public void remove(int index) {
-        for (int i = index; i < size; i++) {
+        checkIndex(index);
+        for (int i = index; i < size - 1; i++) {
             arr[i] = arr[i + 1];
         }
         size--;
@@ -68,8 +81,9 @@ public class MyArrayList<E> {
     }
 
     public void clear() {
-        arr = new MyArrayList[10];
-        size = 0;
+        for (int i = 0; i < size; i++) {
+            arr[i] = null;
+        }
     }
 
     public boolean contains(Object o) {
@@ -102,12 +116,7 @@ public class MyArrayList<E> {
     }
 
     public boolean isEmpty(){
-        for (int i = 0; i < size; i++) {
-            if (arr[i] != null) {
-                return false;
-            }
-        }
-        return true;
+        return size != 0;
     }
 
     public Object[] toArray() {
