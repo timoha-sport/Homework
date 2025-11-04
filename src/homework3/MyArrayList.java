@@ -22,7 +22,6 @@ public class MyArrayList<E> {
 
     private void ensureCapacity(int minCapacity) {
         if (minCapacity > arr.length) {
-            arr = new Object[arr.length * 2];
             int newCapacity = arr.length * 2;
             if (newCapacity < minCapacity) {
                 newCapacity = minCapacity;
@@ -32,7 +31,7 @@ public class MyArrayList<E> {
     }
 
     public void add(int index, E element) {
-        checkIndex(index);
+        checkIndexEquality(index);
         ensureCapacity(size + 1);
         for (int i = size; i > index; i--) {
             arr[i] = arr[i - 1];
@@ -42,15 +41,20 @@ public class MyArrayList<E> {
     }
 
     private void checkIndex(int index) {
-        if (index < 0 || index > size) {
+        if ((index < 0 || index > size) && index != size) {
             throw new IndexOutOfBoundsException("Индекс вне диапазона");
         }
     }
 
+    private void checkIndexEquality(int index) {
+        if ((index < 0 || index > size) && index == size) {
+            throw new IndexOutOfBoundsException("Индекс вне диапазона");
+        }
+    }
 
-    public Object get(int index) {
+    public E get(int index) {
         checkIndex(index);
-        return arr[index];
+        return (E) arr[index];
     }
 
     public void set(int index, E element) {
@@ -67,23 +71,20 @@ public class MyArrayList<E> {
     }
 
     public boolean remove(Object o) {
-        boolean flag = false;
         for (int i = 0; i < size; i++) {
             if (arr[i].equals(o)) {
-                flag = true;
-            }
-            if (flag) {
-                arr[i] = arr[i + 1];
+                remove(i);
+                return true;
             }
         }
-        if (flag) size--;
-        return flag;
+        return false;
     }
 
     public void clear() {
         for (int i = 0; i < size; i++) {
             arr[i] = null;
         }
+        size = 0;
     }
 
     public boolean contains(Object o) {
@@ -116,14 +117,12 @@ public class MyArrayList<E> {
     }
 
     public boolean isEmpty(){
-        return size != 0;
+        return size == 0;
     }
 
     public Object[] toArray() {
         Object[] arrObj = new Object[size];
-        for (int i = 0; i < size; i++) {
-            arrObj[i] = arr[i];
-        }
+        System.arraycopy(arr, 0, arrObj, 0, size);
         return arrObj;
     }
 

@@ -23,7 +23,8 @@ public class Main {
 //        myList.add(1, "W");
 //        myList.remove(2);
 //        System.out.println(myList.remove("W"));
-        myList.clear();
+//        myList.clear();
+//        System.out.println(myList.size());
 //        System.out.println(myList.contains("W"));
 //        System.out.println(myList.indexOf("B"));
 //        System.out.println(myList.lastIndexOf("B"));
