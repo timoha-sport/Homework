@@ -130,13 +130,17 @@ public class MyArrayList<E> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MyArrayList myList = (MyArrayList) o;
-        return code == myList.code;
+        MyArrayList<?> myList = (MyArrayList<?>) o;
+        if (this.size != myList.size) return false;
+        for (int i = 0; i < size; i++) {
+            if (this.arr[i] != myList.arr[i]) return false;
+        }
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code);
+        return Objects.hash();
     }
 
 }
