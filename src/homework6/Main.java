@@ -1,6 +1,6 @@
-package homework5;
+package homework6;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -10,10 +10,12 @@ class Main {
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();
         char[] arr = s.toCharArray();
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new LinkedHashMap<>();
         for (char c : arr) {
-            Integer i = map.getOrDefault(c, 0) + 1;
-            map.put(c, i);
+            if (c != ' ') {
+                Integer i = map.getOrDefault(c, 0) + 1;
+                map.put(c, i);
+            }
         }
         Set<Character> characters = map.keySet();
         for (Character character : characters) {
